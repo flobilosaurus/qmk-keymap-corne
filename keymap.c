@@ -26,46 +26,98 @@ enum custom_keycodes {
   TMUX_P_H, // create horizontal pane
   TMUX_P_X, // close pane
   TMUX_W_L, // jump to last window
-  TMUX_W_C // create window 
+  TMUX_W_C // create window
 };
+
+// Keymap aliase
+// -- Left
+#define AL_A   LALT_T(KC_A)
+#define AL_S   LCTL_T(KC_S)
+#define AL_D   LGUI_T(KC_D)
+#define AL_F   LT(_FUNC, KC_F)
+#define AL_V   RCS_T(KC_V)
+#define AL_R   LSA_T(KC_R)
+#define AL_G   LCAG_T(KC_G)
+#define AL_B   KC_B
+#define AL_T   KC_T
+// -- Right
+#define AL_SCLN  RALT_T(KC_SCLN)
+#define AL_L   RCTL_T(KC_L)
+#define AL_K   RGUI_T(KC_K)
+#define AL_J   LT(_FUNC, KC_J)
+#define AL_M   RCS_T(KC_M)
+#define AL_U   RSA_T(KC_U)
+#define AL_H   LCAG_T(KC_H)
+#define AL_N   KC_N
+#define AL_Y   KC_Y
+// -- Thumb
+#define AL_ESC LT(_RAISE, KC_ESC)
+#define AL_TAB LT(_LOWER, KC_TAB)
+#define AL_ENT LSFT_T(KC_ENT)
+#define AL_SPC RSFT_T(KC_SPC)
+#define AL_BPC LT(_LOWER, KC_BSPC)
+#define AL_DEL LT(_RAISE, KC_DEL)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
+      XXXXXXX,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, RSFT_T(KC_QUOT),
+      XXXXXXX,    AL_A,    AL_S,    AL_D,    AL_F,    AL_G,                         AL_H,    AL_J,    AL_K,    AL_L, AL_SCLN, KC_QUOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ESC,
+      XXXXXXX,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   LOWER,  KC_SPC,     KC_ENT,   RAISE, KC_RALT
+                                  AL_ESC, AL_TAB,  AL_SPC,               AL_ENT, AL_BPC,  AL_DEL
                                       //`--------------------------'  `--------------------------'
-
   ),
 
   [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
+      XXXXXXX,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-   KC_LCTL, TMUX_W_L, TMUX_P_H, XXXXXXX, TMUX_SEL, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, XXXXXXX,
+      XXXXXXX, TMUX_W_L, TMUX_P_H, XXXXXXX, TMUX_SEL, XXXXXXX,                   KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, KC_RSFT, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-  KC_LSFT, XXXXXXX, TMUX_P_X, TMUX_W_C, TMUX_P_V, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, XXXXXXX,TMUX_P_X,TMUX_W_C,TMUX_P_V, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX,  KC_DOT, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, _______,  KC_SPC,     KC_ENT,   GAMING, KC_RALT
+                                          GAMING, KC_BSPC,  AL_SPC,     AL_ENT,  KC_BSPC, GAMING
                                       //`--------------------------'  `--------------------------'
   ),
 
   [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
+       XXXXXXX, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,  KC_GRV,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,  KC_GRV,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, KC_TILD,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, KC_TILD,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,  GAMING,  KC_SPC,     KC_ENT, _______, KC_RALT
+                                          GAMING,  KC_BSPC,  AL_SPC,     AL_ENT, KC_BSPC, GAMING
                                       //`--------------------------'  `--------------------------'
   ),
 
+  [_FUNC] = LAYOUT_split_3x6_3(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F7,   KC_F8,   KC_F9, XXXXXXX,
+  //|--------+-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                          XXXXXXX, XXXXXXX, KC_LSFT,     KC_RSFT,XXXXXXX, XXXXXXX
+                                      //`--------------------------'  `--------------------------'
+  ),
+
+  /* [_EMPTY] = LAYOUT_split_3x6_3( */
+  /* //,-----------------------------------------------------.                    ,-----------------------------------------------------. */
+  /*     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, */
+  /* //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------| */
+  /*     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, */
+  /* //|--------+-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------| */
+  /*     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, */
+  /* //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------| */
+  /*                                         XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX,  XXXXXXX, XXXXXXX  */
+  /*                                     //`--------------------------'  `--------------------------' */
+  /* ), */
   [_GAMING] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
@@ -74,39 +126,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ESC,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX, GAMING, XXXXXXX,     KC_ENT,  GAMING, XXXXXXX 
+                                          XXXXXXX, GAMING, XXXXXXX,     KC_ENT,  GAMING, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   )
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   switch (keycode) {
-    case TMUX_P_V:  
+    case TMUX_P_V:
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL("a") SS_DELAY(10) "v");
       }
       return false;
-    case TMUX_P_H:  
+    case TMUX_P_H:
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL("a") SS_DELAY(10) "s");
       }
       return false;
-    case TMUX_P_X:  
+    case TMUX_P_X:
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL("a") SS_DELAY(10) "x");
       }
       return false;
-    case TMUX_W_C: 
+    case TMUX_W_C:
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL("a") SS_DELAY(10) "c");
       }
       return false;
-    case TMUX_W_L:  
+    case TMUX_W_L:
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL("a") SS_DELAY(10) SS_LCTL("a"));
       }
       return false;
-    case TMUX_SEL: 
+    case TMUX_SEL:
       if (record->event.pressed) {
         SEND_STRING(SS_LCTL("a") SS_DELAY(10) "f");
       }
