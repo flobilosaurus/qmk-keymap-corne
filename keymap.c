@@ -21,12 +21,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "keycodes.h"
 
 enum custom_keycodes {
-  TMUX_SEL = SAFE_RANGE, // select tmux session
-  TMUX_P_V, // create vertial pane
-  TMUX_P_H, // create horizontal pane
-  TMUX_P_X, // close pane
-  TMUX_W_L, // jump to last window
-  TMUX_W_C // create window
+  HERDR_SEL = SAFE_RANGE, // select herdr session
+  HERDR_P_V, // create vertical pane
+  HERDR_P_H, // create horizontal pane
+  HERDR_P_X, // close pane
+  HERDR_W_L, // jump to last window
+  HERDR_W_C, // create window
+  HERDR_S_M  // session manager
 };
 
 // Keymap aliase
@@ -75,9 +76,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       XXXXXXX,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, TMUX_W_L, TMUX_P_H, KC_LEFT_GUI, TMUX_SEL, XXXXXXX,               KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, KC_RSFT, XXXXXXX,
+      XXXXXXX, HERDR_W_L, HERDR_P_H, XXXXXXX, HERDR_SEL, HERDR_S_M,             KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, KC_RSFT, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX,TMUX_P_X,TMUX_W_C,TMUX_P_V, XXXXXXX,                      XXXXXXX, XXXXXXX, KC_COMM,  KC_DOT, XXXXXXX, XXXXXXX,
+      XXXXXXX, XXXXXXX,HERDR_P_X,HERDR_W_C,HERDR_P_V, XXXXXXX,                   XXXXXXX, XXXXXXX, KC_COMM,  KC_DOT, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           GAMING, KC_BSPC,  AL_SPC,     AL_ENT,  KC_BSPC, GAMING
                                       //`--------------------------'  `--------------------------'
@@ -133,34 +134,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   switch (keycode) {
-    case TMUX_P_V:
+    case HERDR_P_V:
       if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a") SS_DELAY(10) "v");
+        SEND_STRING(SS_LCTL("b") SS_DELAY(10) "v");
       }
       return false;
-    case TMUX_P_H:
+    case HERDR_P_H:
       if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a") SS_DELAY(10) "s");
+        SEND_STRING(SS_LCTL("b") SS_DELAY(10) "-");
       }
       return false;
-    case TMUX_P_X:
+    case HERDR_P_X:
       if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a") SS_DELAY(10) "x");
+        SEND_STRING(SS_LCTL("b") SS_DELAY(10) "x");
       }
       return false;
-    case TMUX_W_C:
+    case HERDR_W_C:
       if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a") SS_DELAY(10) "c");
+        SEND_STRING(SS_LCTL("b") SS_DELAY(10) "c");
       }
       return false;
-    case TMUX_W_L:
+    case HERDR_W_L:
       if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a") SS_DELAY(10) SS_LCTL("a"));
+        SEND_STRING(SS_LCTL("b") SS_DELAY(10) SS_LCTL("b"));
       }
       return false;
-    case TMUX_SEL:
+    case HERDR_SEL:
       if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("a") SS_DELAY(10) "f");
+        SEND_STRING(SS_LCTL("b") SS_DELAY(10) "f");
+      }
+      return false;
+    case HERDR_S_M:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("b") SS_DELAY(10) "g");
       }
       return false;
   }
