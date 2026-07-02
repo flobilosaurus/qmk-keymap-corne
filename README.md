@@ -1,11 +1,45 @@
-# qmk-keymap–corne with 'pro micro rp2040' controller
+# Cyberpunk keys, Cherry MX, wired Corne
 
-My keymap for the corne keyboard using the pro micro rp2040 controller.
+QMK keymap for my **cyberpunk keys, Cherry MX, wired Corne**.
 
-## usage
+This keyboard uses an **ATmega32U4 board with Atmel DFU bootloader**.
+Do **not** use the RP2040/UF2 build for this keyboard.
+
+## Compile
 
 ```shell
-cd ~/qmk_firmware/keyboards/crkbd/keymaps
-git clone git@github.com:flobilosaurus/qmk-keymap-corne.git flobilosaurus
-qmk compile -kb crkbd/rev1 -km flobilosaurus -e CONVERT_TO=promicro_rp2040
+cd ~/qmk_firmware
+qmk compile -kb crkbd/rev1 -km flobilosaurus
 ```
+
+## Firmware file to flash
+
+Use the generated HEX file:
+
+```text
+~/qmk_firmware/.build/crkbd_rev1_flobilosaurus.hex
+```
+
+Flash target/MCU should be:
+
+```text
+atmega32u4
+```
+
+If using `dfu-programmer` manually:
+
+```shell
+dfu-programmer atmega32u4 erase --force
+dfu-programmer atmega32u4 flash --force ~/qmk_firmware/.build/crkbd_rev1_flobilosaurus.hex
+dfu-programmer atmega32u4 reset
+```
+
+## Bootloader note
+
+`rules.mk` must contain:
+
+```make
+BOOTLOADER = atmel-dfu
+```
+
+This is needed so QMK Bootmagic, e.g. holding `Q` while plugging in the left half, jumps to the correct Atmel DFU bootloader.
