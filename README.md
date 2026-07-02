@@ -2,10 +2,14 @@
 
 QMK keymap for my wired Corne keyboards.
 
-## Cyberpunk keys, Cherry MX, wired Corne
+## ATmega32U4 / Atmel DFU boards
 
-This keyboard uses an **ATmega32U4 board with Atmel DFU bootloader**.
-Do **not** use the RP2040/UF2 build for this keyboard.
+These keyboards use an **ATmega32U4 board with Atmel DFU bootloader**:
+
+- **Cyberpunk keys, Cherry MX, wired Corne**
+- **Silent, Cherry MX, wired Corne**
+
+Do **not** use the RP2040/UF2 build for these keyboards.
 
 ### Compile
 
